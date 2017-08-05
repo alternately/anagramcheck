@@ -1,4 +1,5 @@
-(ns anagram.core)
+(ns anagram.core
+  (:gen-class))
 
 (defn prime?
   "takes a single argument and returns true iff it is prime"
@@ -35,7 +36,7 @@
 
 ; alphabet is a pregenerated alphabet of characters to be assigned primes. If you need a character that isn't included, add it here. By default, contains characters a-z A-Z 0-9 .,/ _-*
 
-(def alphabet '("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" " l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z" "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z" "0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "." "," "/" " " "_" "-" "*"))
+(def alphabet '("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z" "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z" "0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "." "," "/" " " "_" "-" "*"))
 
 ; alphamap is the map that allows encoding between characters and numbers
 (def alphamap (zipmap alphabet (take (count alphabet) (primes))))
@@ -55,3 +56,14 @@
   "takes two strings as inputs, and returns true if they are anagrams of each other"
   [str1 str2]
   (= (primeencode str1) (primeencode str2)))
+
+
+(defn -main
+  []
+  (println "What is the first word to check?")
+  (let [a   (read-line)]
+    (println "What is the second word to check?")
+    (let [b  (read-line)]
+      (if (anagram? a b)
+        (println "they are anagrams")
+        (println "they are not anagrams")))))
